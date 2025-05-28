@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Álgebra Booleana y Circuitos</title>
+  <style>
+	h1{
+		font-family: Arial, sans-serif
+		color: transparent;
+		-webkit-text-stroke: 1px
+		#688AA6;
+		text-shadow: 0 0 10px #688AA6,
+		0 0 20px #688AA6;
+		animation: neon-pulse 1.5s
+		infinite alternate;
+	}
+	@keyframes neon-pulse{
+		from{ opacity: 0.7; }
+		to{ opacity: 1;}
+	
+	}
+	h2{
+	    color: #4B6382; 
+		font-family: Arial, sans-serif
+		color: transparent;
+		-webkit-text-stroke: 1px
+		#1F3A93;
+		text-shadow: 0 0 10px #1F3A93,
+		0 0 20px #1F3A93;
+		animation: neon-pulse 1.5s
+		infinite alternate;
+	}
+    body {
+      font-family: Arial, sans-serif;
+      background: #071739 ;
+      margin: 0;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      background-color: #005599;
+      flex-wrap: wrap;
+    }
+    .tabs button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .tabs button.active {
+      background-color: #A4B5C4;
+    }
+    .tab-content {
+      display: none;
+      padding: 20px;
+      background-color:  white;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    img, iframe {
+      max-width: 100%;
+      margin-top: 10px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      font-size: 16px;
+      padding: 10px;
+    }
+    button.analyze {
+      background-color: #003366;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .respuesta {
+      margin-top: 15px;
+      background: #e6f0ff;
+      padding: 15px;
+      border-left: 5px solid #003366;
+    }
+    h3 {
+      margin-top: 30px;
+    }
+    .switches {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .led {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #ccc;
+      border: 1px solid #999;
+    }
+    .led.on {
+      background-color: #00ff00;
+    }
+	.led {
+	  width: 20px;
+	  height: 20px;
+	  border-radius: 50%;
+	  background-color: #ccc;
+	  border: 1px solid #999;
+	}
+
+	.led.on {
+	  background-color: #00ff00;
+	}
+  </style>
+</head>
+<body>
+	
+  <header>
+    <h1>Álgebra Booleana y Circuitos Combinatorios</h1>
+    <marquee><p>Explora, aprende y resuelve ejercicios sobre álgebra booleana y su aplicación en circuitos digitales.</p1>
+  </marquee></header>
+
+  <div class="tabs">
+    <button class="tab-button active" onclick="openTab('teoria')">Algebra de Boole ¿Qué es y para qué sirve?</button>
+	<button class="tab-button" onclick="openTab('Ejercicios')">Ejercicios Resueltos de Algebra de Boole </button>
+	<button class="tab-button" onclick="openTab('teoria-Circuitos')">Circuitos Combinatorios</button>
+    <button class="tab-button" onclick="openTab('videos')">Videos y Ejercicios Iteractivos</button>
+    <button class="tab-button" onclick="openTab('practica')">Practica con Ejercicios</button>
+	<button class="tab-button" onclick="openTab('referencia')">Autoría y Referencias</button>
+  </div>
+
+  <div id="teoria" class="tab-content active">
+    <h2>¿Qué es el Álgebra Booleana?</h2>
+    <p>El álgebra booleana es una rama de las matemáticas que se encarga del estudio de variables que solo tienen dos valores posibles: 1 (verdadero) y 0 (falso). Es ampliamente utilizada en la informática, electrónica digital y diseño de circuitos lógicos.</p>
+    <p>Se utiliza para simplificar el diseño de circuitos mediante reglas y leyes que permiten reducir expresiones lógicas y optimizar el hardware.</p>
+	<p>Las operaciones principales son el complemento (NOT), la suma booleana (OR) y el producto (AND). También se utiliza para representar decisiones lógicas en programación y sistemas digitales. Gracias a sus principios, se puede mejorar la eficiencia del hardware y reducir costos en su implementación.</p>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/Mp0HoRxQKIU" frameborder="0" allowfullscreen></iframe>
+    <P>🧠 ¿Cómo se relacionan?
+    El álgebra de Boole se usa para diseñar y analizar circuitos lógicos. Cada operación booleana se puede representar con una puerta lógica, y combinando varias puertas se pueden construir circuitos complejos como sumadores, comparadores, memorias, etc.</P>
+    <h2>Funciones y expresiones booleanas</h2>
+	<p> Una <strong>variable booleana</strong> es aquella que solo puede tomar dos valores: 0 (falso) o 1 (verdadero). El conjunto B = {0, 1} representa estos valores. Cuando usamos varias de estas variables (por ejemplo, x₁, x₂, ..., xₙ), 
+	podemos formar lo que se llama <strong> una función booleana de grado n</strong>, que toma combinaciones de valores 0 y 1 como entrada y da como resultado 0 o 1.<br>
+	<br>Estas funciones se pueden representar mediante <strong>expresiones booleanas</strong>, que se construyen usando las variables y operaciones básicas como:<br>
+	<ul>
+	  <li><strong>AND o conjunción(*)  </strong>: producto lógico</li>
+	  <li><strong>OR o disyunción(+)</strong>: suma lógica</li>
+      <li><strong>NOT  o negación (¬ o complemento)</strong>: negación lógica </li>
+	</ul>
+	Por ejemplo, si E₁ y E₂ son expresiones booleanas, entonces (E₁ * E₂), (E₁ + E₂) y ¬E₁ también lo son.<br>
+	<br>Cada expresión representa una función. Para saber el valor de esa función, se reemplazan las variables con 0 o 1 y se realizan las operaciones. Dos funciones booleanas se consideran <strong>equivalentes</strong> si dan el mismo resultado para todas las combinaciones posibles de entrada.
+	</p>	
+	<h2>Teoremas Booleanos</h2>
+	<h3> Regla del cero y la unidad</h3>
+	<p> Toda operación simple que involucre un elemento con las variables binarias, queda definida:
+	<li> 0 + A = A</li>
+	<li>1 + A = 1</li>
+	<li>0 * A = 0</li>
+	<li>1 * A = A</li>
+	</p>
+	<h3> Complementación</h3>
+	<p> Toda operación entre una variable y su complemento queda definida como:
+	<li> A + A'= 1</li>
+	<li>A * A' = 0</li>
+	</p>
+	<h3> Involución o doble negación</h3>
+	<p> Toda doble negación sera considerada como la variable natural.
+	<li>  (A')'= A</li>
+	</p>
+	<h3> Absorción</h3>
+     <li>A + A * B = A</li>
+	 <li>A * ( A + B ) = A</li>
+	 <li>A * ( A' + B ) = A * B </li>
+	 <li>A'( A + B ) = A' * B </li>
+	 <li>( A + B ) * ( A + B' ) = A </li>
+	 <li>A + A * B = A </li>
+	 <li>A + A' * B = A + B </li>
+	 <li>A' + A * B = A' + B </li>
+	 <li>A * B + A * B' = A </li>
+	 <h3> Reducción</h3>
+     <li>A + A' * B = A + B</li>
+	 <h3>De Morgan</h3>
+     <li>(A * B)' = A' + B'</li>
+	 <li>(A + B)' = A' * B'</li>
+	 <li> A + B = (A' + B')'</li>
+	 <li>A * B = (A' * B')'</li><br> 
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/_BOrML-YkE8" frameborder="0" allowfullscreen></iframe>
+	  <h2>Leyes del Álgebra Booleana</h2>
+    <ul>
+      <li><strong>Identidad:</strong> A + 0 = A, A * 1 = A</li>
+      <li><strong>Nulo:</strong> A + 1 = 1, A * 0 = 0</li>
+      <li><strong>Complemento:</strong> A + A' = 1, A * A' = 0</li>
+      <li><strong>Idempotente:</strong> A + A = A, A * A = A</li>
+      <li><strong>Conmutativa:</strong> A + B = B + A, A * B = B * A</li>
+      <li><strong>Asociativa:</strong> A + (B + C) = (A + B) + C</li>
+      <li><strong>Distributiva:</strong> A * (B + C) = A * B + A * C</li>
+	  </ul>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/4vQdCfCmVoc" frameborder="0" allowfullscreen></iframe><br>
+	<h2>Simplificación de expresiones booleanas</h2>
+	<p>Para reducir el total de términos de una expresión booleana existen técnicas como los mapas de Karnaugh o el método de Quine-McCluskey 
+	pero en programación generalmente es suficiente con las leyes del álgebra de Boole. Teniendo en cuenta que la condición lógica AND es 
+	el producto booleano, OR es la suma y NOT el complemento (que se puede representar con los símbolos * , + o ¬) </p>
+	<h3>Métodos de representación de funciones lógicas</h3>
+	<li>Ecuaciones Lógicas ó booleanas.</li>
+      <li>Tabla de verdad</li>
+      <li>Operadores lógicos gráficos (compuertas).</li>
+      <li>Diagramas de Karnaugh (método gráfico).</li>
+      <li>Diagramas de Venn (método gráfico).</li>
+	</div>
+	<div id="Ejercicios" class="tab-content">
+	<h2>EJEMPLOS DE SIMPLIFICACIONES DE EXPRESIONES BOOLEANAS</h2>
+	<h3>Ejemplo 1</h3>
+	<p> <strong>F = B + BB’ </strong></p>
+	<p><strong>Paso 1:</strong> Observamos que en los dos términos tienen la variable B en común, podemos aplicar la factorización. <br><br>
+		B + BB’ = B * (1 + B')  <br><br>
+      <strong>Paso 2:</strong> Simplificamos lo que está dentro del paréntesis (1 + B'), quedando: <br><br>
+		B * <span style="color: red;">(1 + B')</span> = B * <span style="color: red;">1</span><br><br>
+      <strong>Paso 3:</strong> Aplicamos la Ley de Identidad:<br><br>
+		B * 1 = B<br><br>
+      <strong>Resultado final:</strong> <span style="color: green;"><strong> F = B</strong></span>
+	</p>
+	<h3>Ejemplo 2</h3>
+	<p><strong>F(A,B) = A * B + A * B'</strong></p>
+    <p>
+      <strong>Paso 1:</strong> Observa que ambos términos tienen la variable A en común, entonces podemos aplicar factorización.<br><br>
+	  A * B + A * B' <br><br>
+      <strong>Paso 2:</strong> Factorizamos A fuera de la expresión: <br><br>
+	  A * B + A * B' = A * (B + B')<br><br>
+      <strong>Paso 3:</strong> Aplicamos la Ley del Complemento B + B' = 1: <br><br>
+	  A * <span style="color: red;">(B + B')</span> = A * <span style="color: red;">1</span><br><br> 
+      <strong>Paso 5:</strong> Aplicamos la Ley de Identidad: <br><br>
+	  A * 1 = A<br><br>
+      <strong>Resultado final:</strong> <span style="color: green;"><strong>F = A</strong></span>
+    </p>
+	<h3>Ejemplo 3</h3>
+	<p> <strong>F = A + AB + C</strong></p>
+	<p><strong>Paso 1:</strong> Observamos que en los primeros dos términos tienen la variable A en común, podemos aplicar la factorización. <br><br>
+		<span style="color: red;">A + AB</span> + C = <span style="color: red;">A *(1 + B)</span> + C  <br><br>
+      <strong>Paso 2:</strong> Simplificamos lo que está dentro del paréntesis (1 + B), quedando: <br><br>
+		A * <span style="color: red;">(1 + B)</span> + C = A * <span style="color: red;">1</span> + C <br><br>
+      <strong>Paso 3:</strong> Aplicamos la Ley de Identidad: A * 1 = A, simplificamos: <br><br>
+		<span style="color: red;">A * 1</span> + C =<span style="color: red;"> A</span> + C <br><br>
+      <strong>Resultado final:</strong> <span style="color: green;"><strong> F = A + C</strong></span>
+	</p>
+	<h3>Ejemplo 4</h3>
+	<p> <strong>F =(A + B) (A + C) </strong></p>
+	<p><strong>Paso 1:</strong> Aplicamos la distributiva (expansión de productos). <br><br>
+		(A + B) (A + C) = <span style="color: red;">A * A + A * C + B * A + B * C</span> <br><br>
+      <strong>Paso 2:</strong> Simplificamos los productos A * A = A: <br><br>
+		<span style="color: red;">A * A </span>+ A * C + B * A + B * C = <span style="color: red;">A</span> + AC + BA + BC <br><br>
+      <strong>Paso 3:</strong> Observamos que en los primeros tres términos tienen la variable A en común, podemos aplicar la factorización. <br><br>
+		<span style="color: red;">A + AC + BA</span> + BC = <span style="color: red;">A(1 + C + B)</span> + BC <br><br>
+		<strong>Paso 4:</strong> Simplificamos lo que está dentro del paréntesis (1 + C + B), quedando: <br><br>
+		<span style="color: red;">A(1 + C + B)</span></strong> + BC  = <span style="color: red;">A * 1</span> + BC <br><br>
+		<strong>Paso 4:</strong> Aplicamos la Ley de Identidad: A * 1 = A, simplificamos: <br><br>
+		<span style="color: red;">A * 1</span> + BC = <span style="color: red;">A</span> + BC <br><br> 
+      <strong>Resultado final:</strong> <span style="color: green;"><strong> F = A + BC</strong></span>
+	</p>
+	<h3>Ejemplo 5</h3>
+	<p> <strong>F = xy[(x′z′) + 1] * (y' + x′) + (x + y)* (x′y)' </strong></p>
+	<p><strong>Paso 1:</strong> Simplificamos lo que está dentro del corchete [(x′z′) + 1] ya que sabemos que en el algebra de boole cualquier cosa + 1 nos da como resultado 1: <br><br>
+		xy<span style="color: red;"> [(x′z') + 1] </span>* (y' + x') + (x + y)*( x′y)'= xy<span style="color: red;"> (1)</span> * (y'+ x′) + (x + y)* (x′y)' <br><br>
+      <strong>Paso 2:</strong>Aplicamos la Ley de Identidad: xz * 1 = xz : <br><br>
+		 <span style="color: red;">xy(1) </span>* (y'+ x′)+(x + y)* (x′y)' = <span style="color: red;">xy</span> * (y'+ x′) + (x + y)* (x′y)' <br><br>
+      <strong>Paso 3:</strong>En los dos primeros términos, aplicamos la distributiva (expansión de productos):<br><br>
+		<span style="color: red;">xy(y' + x')</span> + (x + y)*(x′y)' = <span style="color: red;"> xyy' + xyx'</span> + (x + y)*(x′y)' <br><br>
+		<strong>Paso 4:</strong>Simplificamos los productos xyy' y xyx' usando el teorema de complementación y*y'= 0 y x*x'= 0:  <br><br>
+		<span style="color: red;">xyy' + xyx'</span></strong>  + (x + y)*(x′y)' = <span style="color: red;"> 0 + 0 </span> + (x + y)*(x′y)' = (x + y) * (x'y)'<br><br>
+		<strong>Paso 5:</strong> Resolvemos el segundo término del lado derecho. Aplicamos el Teorema de De Morgan (x'y)' = x + y':<br><br>
+		<span style="color: red;"> (x + y) * (x'y)' </span> = <span style="color: red;"> (x + y) * (x + y')</span><br><br> 
+		<strong>Paso 6:</strong> En los dos términos, aplicamos la distributiva (expansión de productos):<br><br>
+		<span style="color: red;">(x + y) * (x + y') </span> =  <span style="color: red;"> xx + xy' + yx + yy'</span><br><br> 
+		<strong>Paso 7:</strong> Simplificamos los productos xx y yy' usando el teorema de complementación x*x= x y y'*y= 0: <br><br>
+		<span style="color: red;"> xx + xy' + yx + yy' </span>=<span style="color: red;"> x + xy' + yx + 0 </span> = x + xy' + yx<br><br> 
+		<strong>Paso 8:</strong> Observamos que en todos los términos tienen la variable x en común, podemos aplicar la factorización. <br><br>
+		<span style="color: red;"> x + xy' + yx </span> = <span style="color: red;"> x(1 + y' + y)</span> <br><br> 
+		<strong>Paso 9:</strong> Dentro del paréntesis aplicamos la Ley del Complemento y + y' = 1: <br><br>
+		x(<span style="color: red;"></span> 1 + y' + y) = x<span style="color: red;">(1 + 1)</span>  <br><br> 
+		<strong>Paso 10:</strong>y luego simplificamos dentro del paréntesis  1 + 1 = 1:<br><br>
+	    x<span style="color: red;"> (1 + 1)</span> = x<span style="color: red;"> (1)</span> <br><br>
+		<strong>Paso 11:</strong> Aplicamos la Ley de Identidad: x * 1 = x, simplificamos: <br><br>
+		<span style="color: red;">x(1)</span> = <span style="color: red;">x</span><br><br>
+      <strong>Resultado final:</strong> <span style="color: green;"><strong> F = X</strong></span>
+	</p>
+	<h2>Ejemplos de Demostrar la equivalencia</h2>
+	<h3>Ejemplo 1</h3>
+	<p> <strong>A + AB + CD = AC</strong></p>
+	<p><strong>Paso 1:</strong> Usamos la ley de absorción en los primeros dos términos A + AB= A <br><br>
+		<span style="color: red;">A + AB</span> + CD  = AC <br><span style="color: red;">A</span> + CD = AC  <br><br>
+      <strong>Resultado final:</strong> Demostramos que la equivalencia no es igual <span style="color: green;"> <strong> A + CD ≠ AC </strong></span>
+	</p>
+	<h3>Ejemplo 2</h3>
+	<p> <strong>(x + z')' + yz * w' = x + yz </strong></p>
+	<p><strong>Paso 1:</strong>  Resolvemos el primer término. Aplicamos el Teorema de De Morgan (x + z')' = x' * z :<br><br>
+		<span style="color: red;">(x + z')'</span> + yz * w' = x + yz <br><span style="color: red;">x'z</span> + yz * w' = x + yz   <br><br>
+      <strong>Paso 2:</strong> En los dos términos del lado derecho, aplicamos la distributiva (expansión de productos): <br><br>
+	  x'z+<span style="color: red;"> yz * w'</span> = x + yz <br>x'z + <span style="color: red;">yzw'</span>= x + yz <br><br>
+      <strong>Paso 3:</strong> Observamos que en todos los términos tienen la variable z en común, podemos aplicar la factorización. <br><br>
+		<span style="color: red;">x'z + yzw'</span> = x + yz <br><span style="color: red;">z(x' + yw')</span> = x + yz<br><br>
+      <strong>Resultado final:</strong> Demostramos que la equivalencia no es igual <span style="color: green;"> <strong> z(x' + yw') ≠ x + yz</strong></span>
+	</p>
+	<h3>Ejemplo 3</h3>
+	<p> <strong>(AB)' + A = 1 </strong></p>
+	<p><strong>Paso 1:</strong> Resolvemos los términos del lado izquierdo. Aplicamos el Teorema de De Morgan (AB)' = A' + B': <br><br>
+		<span style="color: red;">(AB)'</span> + A = 1 <br><span style="color: red;"> A' + B'</span> + A =  1 <br><br>
+      <strong>Paso 2:</strong> Aplicamos la Ley del Complemento A' + A = 1: <br><br>
+	  <span style="color: red;">A' + A</span> + B' = 1 <br><span style="color: red;"> 1 </span> + B = 1  <br><br>
+      <strong>Paso 3:</strong>  Simplificamos:  <br><br>
+		<span style="color: red;"> 1 + B</span> = 1 <br><span style="color: red;">1</span> = 1<br><br>
+      <strong>Resultado final:</strong> Demostramos que la equivalencia es igual <span style="color: green;"> <strong> 1 = 1</strong></span>
+	</p>
+	</div>
+    
+	<div id="teoria-Circuitos" class="tab-content">
+    <h2>Compuertas Lógicas</h2>
+	<p>El álgebra booleana se utiliza para modelar los circuitos electrónicos. Un dispositivo electrónico está constituido por un número de circuitos. Cada circuito puede
+	diseñarse aplicando las reglas del álgebra de Boole. Los elementos básicos de los circuitos se denominan compuertas. Cada tipo de compuerta representa una operación booleana
+	</p>
+	<h3>Compuertas básicas</h3>
+    <ul>
+      <li><strong>AND:</strong> Salida 1 si todas las entradas son 1. F = A * B</li>
+      <li><strong>OR:</strong> Salida 1 si al menos una entrada es 1. F = A + B</li>
+      <li><strong>NOT:</strong> Invierte la entrada. F = A'</li>
+	  <pre><img width="300" height="200" src="https://th.bing.com/th/id/R.bdaab921c81975066f0d909818289e31?rik=ljew0C0%2bp9gLDw&riu=http%3a%2f%2f2.bp.blogspot.com%2f_G9n3QfTJBs0%2fTL-5hdKLU7I%2fAAAAAAAAAAc%2fNGs4Wl8r5bE%2fs1600%2fgates.gif&ehk=vs%2bY0NM57O17bGoAHpkKcj9nTaM6Hd6%2b8m6eP06z8gc%3d&risl=&pid=ImgRaw&r=0" alt="Compuertas básicas">               <img width="380" height="200"src="https://static.wixstatic.com/media/9f0aca_10b42f37a91441b4a23749f66b39cca1.jpg/v1/fill/w_666,h_293,al_c,q_80,enc_auto/9f0aca_10b42f37a91441b4a23749f66b39cca1.jpg" alt="Compuertas básicas OR"></pre><br>
+	  <pre><img width="380" height="200" src="https://www.electrontools.com/Home/WP/wp-content/uploads/2016/05/Compuerta-OR.png" alt="Compuertas básicas OR">         <img width="380" height="190" src="https://th.bing.com/th/id/R.a8211733a300f32a663a0d3fd385c232?rik=YWljilbjJgzGQw&pid=ImgRaw&r=0" alt="Compuertas básicas NOT"></pre><br>
+	</ul>
+    <h3>Ejemplo de circuitos</h3>
+	<p>F= AB' + A'C' + B</p>
+	<img src="https://i.ibb.co/nsmg2XLy/ejemplo-de-circuito.png" alt="Ejemplo de circuitos">
+    <h2>Circuitos Combinatorios</h2>
+	<p>Los circuitos combinatorios son sistemas lógicos donde la salida depende únicamente de las entradas actuales, sin usar memoria ni estados previos. Se construyen usando
+	compuertas lógicas como AND, OR y NOT. Estos circuitos se utilizan para realizar operaciones básicas como sumas, comparaciones, decodificadores y más. La función que realizan 
+	puede expresarse mediante una expresión booleana. </p>
+    <ul>
+      <li><strong>Sumador:</strong> S = A XOR B, C = A * B</li>
+      <li><strong>Codificador:</strong> convierte múltiples entradas en una combinación binaria.</li>
+      <li><strong>Decodificador:</strong> convierte combinaciones binarias en múltiples salidas.</li>
+      <li><strong>Multiplexor:</strong> selecciona una de varias entradas para enviar a la salida.</li>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/z39D0mbqwtI" frameborder="0" allowfullscreen></iframe>
+    </ul>
+	<h3>Ejemplo de circuitos combinatorios</h3>
+	<p>F= AB' + A'B</p>
+	<img src="https://cdn.educba.com/academy/wp-content/uploads/2020/11/XOR-gate-2-300x130.jpg" alt="Ejemplo de circuitos combinatorios">
+	<br><p>F= AB + AC </p>
+	<img src="https://i.ibb.co/rK3mGxKr/Ejemplo-de-circuitos-combinatorios.png" alt="Ejemplo de circuitos combinatorios">
+	<h3>Ejemplo de circuito combinacional</h3>
+	<p>F= AB + C </p>
+	<img src="https://i.ibb.co/XrW7Y4tp/Circuito-combinacional.png" alt="Ejemplo de circuitos combinacional">
+	<h3>Ejercicio</h3>
+	<img src="https://i.ibb.co/gMTCzHb0/Ejercicio.png" alt="Ejemplo de ejercicio">
+	<p> Este video puede ayudarte a entender los conceptos anteriores</p>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/QFYil-X7vgk" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <div id="referencia" class="tab-content">
+		  <h1>AUTORÍA</h1>
+		  <h2>INSTITUCIÓN</h2>
+		  <p><strong>Universidad Autónoma de Yucatán</strong></p>
+		  <h2>CARRERA</h2>
+		  <p><strong>Licenciatura en Ingeniería de Software </strong></p> 
+		  <h2> ASIGNATURA</h2>
+		  <p><strong>Matemáticas Discretas</strong></p>
+		  <h2>TEMA</h2>
+		  <ul>
+		  <p><strong>2. Algebra De boole</strong></p>
+		  <strong>
+			  <ul>
+				  <p>2.1 Teoremas Booleanos</p>
+				  <p>2.2 Leyes de Álgebra de Boole</p>
+				  <p>2.3 Simplificación de expresiones booleanas</p>
+			  </ul>
+			 
+		  <p>4. Circuitos Combinatorios</p>
+			  
+			  <ul>
+				  <p>4.1 Compuertas AND, OR Y NOT</p>
+				  <p>Circuitos combinatorios y su expresión booleana asociada</p>
+			  </ul>
+			  </strong>
+		  </ul>
+		  <h2>ESTUDIANTES</h2>
+		  <strong>
+		  <ul>
+		  <li>Cynthia Alessandra Aguilar Uicab</li>
+		  <li>José Jesús Meza García</li>
+		  <li>Jazmin Esmeralda Och Fernández</li>
+		  <li>Yesenia Michelle Chuc Kuyoc</li>
+		  </ul>
+		  </strong>
+		  <h2>FECHA</h2> 
+		  <p><strong>Martes 27 de Mayo de 2025</strong></p>
+		  <h1>Referencias</h1>
+		  <a href="https://sedici.unlp.edu.ar/bitstream/handle/10915/3835/B_-_Funciones_booleanas.pdf?sequence=10&isAllowed=yfile:///C:/Users/Admin/Downloads/Algebra_De_Boole.pdf" target="_blank">Funciones y expresiones booleanas. Edu.ar. Recuperado el 27 de mayo de 2025, de https://sedici.unlp.edu.ar/bitstream/handle/10915/3835/B_-_Funciones_booleanas.pdf?sequence=10&isAllowed=yfile:///C:/Users/Admin/Downloads/Algebra_De_Boole.pdf</a><br><br>
+		  <a href="https://libroweb.alfaomega.com.mx/book/477/free/ovas_statics/lec_adicionales/Algebra_de_Boole.pdf "target="_blank">(S/f). Com.mx. Recuperado el 27 de mayo de 2025, de https://libroweb.alfaomega.com.mx/book/477/free/ovas_statics/lec_adicionales/Algebra_de_Boole.pdf</a><br><br>
+		  <a href="https://ocw.uc3m.es/pluginfile.php/2302/mod_page/content/18/Tema2_algebra_Boole.pdf "target="_blank">Entrena, ©. Luis, López, C., García, M., & Millán, E. S. (s/f). Algebra de Boole y puertas lógicas. Uc3m.es. Recuperado el 27 de mayo de 2025, de https://ocw.uc3m.es/pluginfile.php/2302/mod_page/content/18/Tema2_algebra_Boole.pdf</a><br><br>
+		  <a href="https://catedra.ing.unlp.edu.ar/electrotecnia/islyd/Temas%201-2%20Algebra%20de%20Boole-Karnaugh%202008%20BYN.pdf "target="_blank">Lógicos y Digitalesgicos y Digitales, I. I. Ó. a. L. S. n. a. L. S. (s/f). Algebra de Algebra de BooleBoole. Edu.ar. Recuperado el 27 de mayo de 2025, de https://catedra.ing.unlp.edu.ar/electrotecnia/islyd/Temas%201-2%20Algebra%20de%20Boole-Karnaugh%202008%20BYN.pdf</a><br><br>
+		  <a href="https://blogsaverroes.juntadeandalucia.es/sierramagina/files/2016/02/digital3.pdf "target="_blank">(N.d.). Juntadeandalucia.Es. Retrieved May 27, 2025, from https://blogsaverroes.juntadeandalucia.es/sierramagina/files/2016/02/digital3.pdf</a><br><br>
+		  <a href="https://www.victoriglesias.net/simplificacion-de-expresiones-booleanas-mediante-algebra-de-boole/#google_vignette "target="_blank">Castán, V. I. (n.d.). Simplificación de expresiones booleanas mediante álgebra de Boole. Víctor Iglesias. Retrieved May 27, 2025, from https://www.victoriglesias.net/simplificacion-de-expresiones-booleanas-mediante-algebra-de-boole/#google_vignette</a><br><br>
+		  <a href="https://www.lifeder.com/algebra-booleana/"target="_blank">Álgebra booleana. (2023, agosto 24). Lifeder. https://www.lifeder.com/algebra-booleana/</a><br><br>
+    </div>
+
+  <div id="videos" class="tab-content">
+    <h2>Videos Explicativos</h2>
+    <p>Estos videos te ayudarán a entender los conceptos y aplicarlos en problemas reales:</p>
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/lGklzT9jvN0" frameborder="0" allowfullscreen></iframe>
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/BITSRChr-WY" frameborder="0" allowfullscreen></iframe>
+   
+	<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Evaluador de Álgebra Booleana</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, button, textarea { width: 100%; padding: 10px; margin-top: 10px; }
+    #resultado { margin-top: 20px; white-space: pre-wrap; background: #f0f0f0; padding: 10px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+  <title>Ejercicios de Álgebra Booleana</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f4f4f4;
+    }
+    .exercise {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .feedback {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .steps {
+      display: none;
+      margin-top: 10px;
+      background: #e9e9e9;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ejercicios Interactivos: Álgebra Booleana</h1>
+  <div id="exercises"></div>
+
+  <script>
+    const ejercicios = [
+      {
+        expresion: "A·B + A'·B",
+        resultado: "B",
+        pasos: [
+          "Escribimos la expresión: A·B + A'·B",
+          "Ambos términos tienen en común a B.",
+          "Sacamos factor común: B·(A + A')",
+          "Aplicamos la ley del complemento: A + A' = 1",
+          "Multiplicamos: B·1 = B"
+        ],
+        leyes: "Distributiva, Complemento, Identidad"
+      },
+      {
+        expresion: "(A + B)·(A' + B)",
+        resultado: "B",
+        pasos: [
+          "Escribimos: (A + B)·(A' + B)",
+          "Aplicamos la ley distributiva: (A + B)(A' + B) = A·A' + A·B + B·A' + B·B",
+          "Simplificamos términos: A·A' = 0, B·B = B",
+          "Entonces queda: 0 + A·B + A'·B + B",
+          "Aplicamos la ley idempotente y absorción: A·B + A'·B + B = B"
+        ],
+        leyes: "Distributiva, Complemento, Idempotente, Absorción"
+      },
+      {
+        expresion: "A + A·B + A·B·C",
+        resultado: "A",
+        pasos: [
+          "Escribimos la expresión: A + A·B + A·B·C",
+          "Sacamos factor común de los tres términos: A·(1 + B + B·C)",
+          "Analizamos la parte del paréntesis: 1 + B + B·C",
+          "Usamos ley de identidad y absorción: 1 + cualquier cosa = 1",
+          "Entonces: A·1 = A"
+        ],
+        leyes: "Distributiva inversa, Identidad, Absorción"
+      },
+      {
+        expresion: "A·B + A·B' + A'·B",
+        resultado: "A + A'·B",
+        pasos: [
+          "Agrupamos términos comunes: (A·B + A·B') + A'·B",
+          "Factor común en los primeros dos: A·(B + B') + A'·B",
+          "B + B' = 1, Entonces: A·1 + A'·B = A + A'·B",
+          "Este resultado no se puede simplificar más directamente."
+        ],
+        leyes: "Distributiva, Complemento, Identidad"
+      },
+      {
+        expresion: "A·(B + C) + A'·C",
+        resultado: "A·B + C",
+        pasos: [
+          "Aplicamos distributiva: A·B + A·C + A'·C",
+          "Agrupamos los términos con C: A·B + (A·C + A'·C)",
+          "Sacamos factor común en los términos con C: A·B + C·(A + A')",
+          "A + A' = 1, entonces: A·B + C·1 = A·B + C"
+        ],
+        leyes: "Distributiva, Complemento, Identidad"
+      }
+    ];
+
+    window.onload = () => {
+      const container = document.getElementById("exercises");
+      ejercicios.forEach((ej, i) => {
+        const div = document.createElement("div");
+        div.className = "exercise";
+        div.innerHTML = `
+          <h2>✅ Ejercicio ${i + 1}</h2>
+          <p><strong>Expresión original:</strong> ${ej.expresion}</p>
+          <input type="text" id="answer${i}" placeholder="Escribe tu respuesta aquí">
+          <button onclick="checkAnswer(${i}, '${ej.resultado}')">Verificar</button>
+          <button onclick="showSteps(${i})">📘 Ver resolución</button>
+          <div id="feedback${i}" class="feedback"></div>
+          <div id="steps${i}" class="steps">
+            <h4>Paso a paso:</h4>
+            ${ej.pasos.map(p => `<p>${p}</p>`).join('')}
+            <p><strong>✅ Resultado final:</strong> ${ej.resultado}</p>
+            <p><strong>📘 Leyes utilizadas:</strong> ${ej.leyes}</p>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    };
+
+    function checkAnswer(index, correct) {
+      const input = document.getElementById("answer" + index).value.trim();
+      const feedback = document.getElementById("feedback" + index);
+      if (input.toUpperCase() === correct.toUpperCase()) {
+        feedback.textContent = "¡Correcto! 🎉";
+        feedback.style.color = "green";
+      } else {
+        feedback.textContent = "Incorrecto. Intenta de nuevo.";
+        feedback.style.color = "red";
+      }
+    }
+
+    function showSteps(index) {
+      const steps = document.getElementById("steps" + index);
+      steps.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
+
+
+  <script>
+    async function resolver() {
+      const expresion = document.getElementById("expresion").value;
+      const resultado = document.getElementById("resultado");
+
+      resultado.textContent = "Procesando...";
+
+      try {
+        const response = await fetch("http://localhost:5000/resolver", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ expresion })
+        });
+
+        const data = await response.json();
+        resultado.textContent = data.explicacion;
+      } catch (error) {
+        resultado.textContent = "Error al conectar con el servidor.";
+      }
+    }
+  </script>
+</body>
+</html>
+
+  </div>
+
+  <div id="practica" class="tab-content">
+    <h2>Práctica Interactiva: Compuerta AND</h2>
+    <p>Este ejercicio simula el funcionamiento de una compuerta lógica AND. La salida será 1 (LED encendido) solo si ambas entradas A y B están activadas.</p>
+    <div class="switches">
+      <label>A <input type="checkbox" id="a" onchange="evaluarCircuito()"></label>
+      <label>B <input type="checkbox" id="b" onchange="evaluarCircuito()"></label>
+      <div id="led" class="led"></div>
+	  </div>
+	  <p><strong>Expresión booleana:</strong> F = A * B</p>
+	  
+	  <h2>Práctica Interactiva: Compuerta OR</h2></li>
+	  <p>Este ejercicio simula el funcionamiento de una compuerta lógica OR. La salida será 1 (LED encendido) si al menos una de las entradas A o B está activada.</p>
+	  <div class="switches">
+		<label>A <input type="checkbox" id="a_or" onchange="evaluarOR()"></label>
+		<label>B <input type="checkbox" id="b_or" onchange="evaluarOR()"></label>
+		<div id="led_or" class="led"></div>
+	  </div>
+	  <p><strong>Expresión booleana:</strong> F = A + B</p>
+	  
+	  <h2>Práctica Interactiva: Compuerta NOT</h2>
+	  <p>Este ejercicio simula el funcionamiento de una compuerta lógica NOT. La salida será 1 (LED encendido) si la entrada A está desactivada (0).</p>
+	  <div class="switches">
+		<label>A <input type="checkbox" id="a_not" onchange="evaluarNOT()"></label>
+		<div id="led_not" class="led"></div>
+	  </div>
+	  <p><strong>Expresión booleana:</strong> F = A'</p>
+	  <body>
+  <h1>Ejercicios de Álgebra Booleana</h1>
+
+  <div class="tabs">
+    <div class="tab active" data-ej="1">Ejercicio 1</div>
+    <div class="tab" data-ej="2">Ejercicio 2</div>
+    <div class="tab" data-ej="3">Ejercicio 3</div>
+  </div>
+
+  <!-- Ejercicio 1 -->
+  <div class="ejercicio active" id="ejercicio-1">
+    <h2>Ejercicio 1</h2>
+    <p><strong>Instrucción:</strong> Completa la tabla de verdad para la expresión <code>(A + B) · ¬C</code>. Llena la columna final con el resultado de esa expresión.</p>
+    <table>
+      <thead>
+        <tr><th>A</th><th>B</th><th>C</th><th>A + B</th><th>¬C</th><th>(A + B) · ¬C</th></tr>
+      </thead>
+      <tbody id="tabla-ej1"></tbody>
+    </table>
+    <button onclick="verificarRespuestas(1)">Verificar respuestas</button>
+  </div>
+
+  <!-- Ejercicio 2 -->
+  <div class="ejercicio" id="ejercicio-2">
+    <h2>Ejercicio 2</h2>
+    <table>
+      <thead>
+        <tr><th>A</th><th>B</th><th>C</th><th>A · B</th><th>¬(A · B)</th><th>¬(A · B) + C</th></tr>
+      </thead>
+      <tbody id="tabla-ej2"></tbody>
+    </table>
+    <button onclick="verificarRespuestas(2)">Verificar respuestas</button>
+  </div>
+
+  <!-- Ejercicio 3 -->
+  <div class="ejercicio" id="ejercicio-3">
+    <h2>Ejercicio 3</h2>
+    <table>
+      <thead>
+        <tr><th>A</th><th>B</th><th>C</th><th>A + B</th><th>(A + B) · C</th></tr>
+      </thead>
+      <tbody id="tabla-ej3"></tbody>
+    </table>
+    <button onclick="verificarRespuestas(3)">Verificar respuestas</button>
+  </div>
+
+  <script>
+    const combinaciones = [
+      [0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1],
+      [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]
+    ];
+
+    function generarTablas() {
+      for (let ej = 1; ej <= 3; ej++) {
+        const cuerpo = document.getElementById(`tabla-ej${ej}`);
+        cuerpo.innerHTML = '';
+        combinaciones.forEach(([a, b, c]) => {
+          let fila = document.createElement('tr');
+          fila.innerHTML = generarFilaEjercicio(ej, a, b, c);
+          cuerpo.appendChild(fila);
+        });
+      }
+    }
+
+    function generarFilaEjercicio(ej, a, b, c) {
+      switch (ej) {
+        case 1:
+          const or = a | b;
+          const notC = c ^ 1;
+          return `<td>${a}</td><td>${b}</td><td>${c}</td><td>${or}</td><td>${notC}</td>
+                  <td class="resultado-editable" contenteditable></td>`;
+        case 2:
+          const and = a & b;
+          const notAnd = and ^ 1;
+          const exp2 = notAnd | c;
+          return `<td>${a}</td><td>${b}</td><td>${c}</td><td>${and}</td><td>${notAnd}</td>
+                  <td class="resultado-editable" contenteditable></td>`;
+        case 3:
+          const orAB = a | b;
+          const res3 = orAB & c;
+          return `<td>${a}</td><td>${b}</td><td>${c}</td><td>${orAB}</td>
+                  <td class="resultado-editable" contenteditable></td>`;
+      }
+    }
+
+    function verificarRespuestas(num) {
+      const filas = document.querySelectorAll(`#tabla-ej${num} tr`);
+      filas.forEach((fila, i) => {
+        const [a, b, c] = combinaciones[i];
+        let resultado;
+        if (num === 1) resultado = ((a | b) & (c ^ 1));
+        else if (num === 2) resultado = ((!(a & b)) | c) & 1;
+        else if (num === 3) resultado = ((a | b) & c);
+
+        const celda = fila.querySelector('.resultado-editable');
+        const valor = celda.textContent.trim();
+        celda.classList.remove('correcto', 'incorrecto');
+        if (valor === resultado.toString()) {
+          celda.classList.add('correcto');
+        } else {
+          celda.classList.add('incorrecto');
+        }
+      });
+    }
+
+    // Cambiar entre pestañas
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        document.querySelectorAll('.ejercicio').forEach(ej => ej.classList.remove('active'));
+        document.getElementById(`ejercicio-${tab.dataset.ej}`).classList.add('active');
+      });
+    });
+
+    generarTablas();
+  </script>
+  </body>
+
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicios de Álgebra Booleana</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .indicacion {
+      background: #fff8b3;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 4px;
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 25px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .correcto {
+      background-color: #c8e6c9;
+    }
+    .incorrecto {
+      background-color: #ffcdd2;
+    }
+    .estado {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ejercicios de Lógica Digital</h1>
+
+  <!-- Ejercicio 1 -->
+  <h2>Ejercicio 1: ¬A + (B · C)</h2>
+  <div class="indicacion">
+    Llena la tabla para la expresión <strong>¬A + (B · C)</strong>. Usa:
+    <ul>
+      <li>¬A: 1 si A es 0, y 0 si A es 1</li>
+      <li>B · C: AND</li>
+      <li>Resultado final: OR entre ¬A y (B · C)</li>
+    </ul>
+	<p>Una ayuda:</p>
+	<p>El apartado “Estado” te da una pista del resultado al que debes llegar: 1=verde 0=rojo.
+	Las casillas sombreadas en rojo te indican que tu respuesta en el proceso es incorrecta.
+	¡Verifica tu proceso y guíate del estado!</p>
+  </div>
+
+  <table id="tabla1">
+    <thead>
+      <tr>
+        <th>A</th><th>B</th><th>C</th>
+        <th>¬A</th><th>B · C</th><th>Resultado</th><th>Estado</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <button onclick="verificar(1)">Verificar ejercicio 1</button>
+
+  <!-- Ejercicio 2 -->
+  <h2>Ejercicio 2: (A · B) + ¬(B + C)</h2>
+  <div class="indicacion">
+    Llena la tabla para la expresión <strong>(A · B) + ¬(B + C)</strong>. Usa:
+    <ul>
+      <li>A · B: AND</li>
+      <li>B + C: OR → luego aplícale NOT</li>
+      <li>Resultado: OR entre los anteriores</li>
+    </ul>
+	<p>Una ayuda:</p>
+	<p>El apartado “Estado” te da una pista del resultado al que debes llegar: 1=verde 0=rojo.
+	Las casillas sombreadas en rojo te indican que tu respuesta en el proceso es incorrecta.
+	¡Verifica tu proceso y guíate del estado!</p>
+  </div>
+
+  <table id="tabla2">
+    <thead>
+      <tr>
+        <th>A</th><th>B</th><th>C</th>
+        <th>A · B</th><th>B + C</th><th>¬(B + C)</th><th>Resultado</th><th>Estado</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <button onclick="verificar(2)">Verificar ejercicio 2</button>
+
+  <script>
+    function crearTabla(tablaID, columnas) {
+      const tbody = document.querySelector(`#${tablaID} tbody`);
+      let html = "";
+      for (let A = 0; A <= 1; A++) {
+        for (let B = 0; B <= 1; B++) {
+          for (let C = 0; C <= 1; C++) {
+            html += `<tr><td>${A}</td><td>${B}</td><td>${C}</td>`;
+            for (let i = 0; i < columnas - 4; i++) {
+              html += `<td><input type="text" maxlength="1"></td>`;
+            }
+            html += `<td class="estado">⚪</td></tr>`;
+          }
+        }
+      }
+      tbody.innerHTML = html;
+    }
+
+    crearTabla("tabla1", 7); // A B C ¬A B·C Resultado Estado
+    crearTabla("tabla2", 8); // A B C A·B B+C ¬(B+C) Resultado Estado
+
+    function verificar(ejercicio) {
+      const tabla = document.getElementById(`tabla${ejercicio}`).querySelector("tbody");
+      const filas = tabla.querySelectorAll("tr");
+
+      filas.forEach(fila => {
+        const celdas = fila.querySelectorAll("td");
+        const A = parseInt(celdas[0].textContent);
+        const B = parseInt(celdas[1].textContent);
+        const C = parseInt(celdas[2].textContent);
+        let esperados = [];
+
+        if (ejercicio === 1) {
+          const notA = A ? 0 : 1;
+          const bandc = B && C;
+          const resultado = notA || bandc;
+          esperados = [notA, bandc, resultado];
+        } else if (ejercicio === 2) {
+          const aandb = A && B;
+          const borc = B || C;
+          const notborc = borc ? 0 : 1;
+          const resultado = aandb || notborc;
+          esperados = [aandb, borc, notborc, resultado];
+        }
+
+        // Verificar inputs
+        for (let i = 3; i < celdas.length - 1; i++) {
+          const input = celdas[i].querySelector("input");
+          const esperado = esperados[i - 3];
+          if (input) {
+            const valor = parseInt(input.value);
+            if (valor === esperado) {
+              input.classList.add("correcto");
+              input.classList.remove("incorrecto");
+            } else {
+              input.classList.add("incorrecto");
+              input.classList.remove("correcto");
+            }
+          }
+        }
+
+        // Mostrar estado del circuito
+        const salida = esperados[esperados.length - 1];
+        celdas[celdas.length - 1].textContent = salida === 1 ? "🟢" : "🔴";
+      });
+    }
+  </script>
+
+</body>
+  </div>
+  <script>
+    function openTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(div => div.classList.remove('active'));
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function analizar() {
+      const texto = document.getElementById("entrada").value.toLowerCase();
+      const respuesta = document.getElementById("respuesta");
+
+      if (texto.includes("a·b + a·b'")) {
+        respuesta.innerHTML = "✅ F(A,B) = A·B + A·B' = A·(B + B') = A·1 = <strong>A</strong>";
+      } else if (texto.includes("a + a'")) {
+        respuesta.innerHTML = "✅ A + A' = <strong>1</strong> (Ley del complemento)";
+      } else if (texto.includes("a·a'")) {
+        respuesta.innerHTML = "✅ A·A' = <strong>0</strong> (Ley del complemento)";
+      } else {
+        respuesta.innerHTML = "🤖 Aún no puedo resolver esa expresión automáticamente. Prueba con ejemplos como: A·B + A·B', A + A', A·A'";
+      }
+    }
+
+    function evaluarCircuito() {
+      const a = document.getElementById("a").checked;
+      const b = document.getElementById("b").checked;
+      const led = document.getElementById("led");
+      if (a && b) {
+        led.classList.add("on");
+      } else {
+        led.classList.remove("on");
+      }
+    }
+		function evaluarOR() {
+	  const a = document.getElementById("a_or").checked;
+	  const b = document.getElementById("b_or").checked;
+	  const led = document.getElementById("led_or");
+	  if (a || b) {
+		led.classList.add("on");
+	  } else {
+		led.classList.remove("on");
+	  }
+	}
+		function evaluarNOT() {
+	  const a = document.getElementById("a_not").checked;
+	  const led = document.getElementById("led_not");
+	  if (!a) {
+		led.classList.add("on");
+	  } else {
+		led.classList.remove("on");
+	  }
+	}
+  </script>
+ 
+  <title>Ejercicios de Álgebra Booleana</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .tab {
+      margin: 0 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: #ddd;
+      border-radius: 5px;
+    }
+    .tab.active {
+      background-color: #4285f4;
+      color: white;
+      font-weight: bold;
+    }
+    .ejercicio {
+      display: none;
+    }
+    .ejercicio.active {
+      display: block;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: center;
+    }
+    .resultado-editable {
+      background-color: #fff3cd;
+    }
+    .correcto {
+      background-color: #c8e6c9;
+    }
+    .incorrecto {
+      background-color: #ffcdd2;
+    }
+  </style>
+</head>
+
+</html>
